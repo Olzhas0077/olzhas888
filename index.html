@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Проект с Flexbox и БЭМ</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+      color: #333;
+      background-color: #f9f9f9;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    /* HEADER */
+    .header {
+      background-color: #f8f8f8;
+      padding: 20px 0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .header__container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .header__logo {
+      font-size: 28px;
+      font-weight: 700;
+      color: #007bff;
+    }
+    .header__nav {
+      display: flex;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+    .header__link {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 4px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .header__link:hover,
+    .header__link:focus {
+      background-color: #007bff;
+      color: white;
+      outline: none;
+    }
+    /* HERO (главный экран) */
+    .hero {
+      background: linear-gradient(135deg, #a6c0fe 0%, #f68084 100%);
+      color: white;
+      padding: 100px 0 80px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero__container {
+      max-width: 700px;
+    }
+    .hero__title {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+    .hero__description {
+      font-size: 1.25rem;
+      margin-bottom: 40px;
+    }
+    .hero__button {
+      font-size: 1.1rem;
+      background-color: white;
+      color: #f68084;
+      padding: 14px 32px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(255,255,255,0.6);
+      transition: background-color 0.3s, color 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .hero__button:hover,
+    .hero__button:focus {
+      background-color: #f68084;
+      color: white;
+      outline: none;
+    }
+    /* SERVICES SECTION */
+    .services {
+      background-color: white;
+      padding: 60px 0 80px;
+    }
+    .services__container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+    .service-card {
+      background-color: #fefefe;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+      flex: 1 1 300px;
+      max-width: 320px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-8px);
+    }
+    .service-card__image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .service-card__content {
+      padding: 20px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .service-card__title {
+      font-size: 1.25rem;
+      margin-bottom: 12px;
+      color: #007bff;
+    }
+    .service-card__text {
+      flex-grow: 1;
+      font-size: 1rem;
+      color: #555;
+    }
+    /* PARTNERS BLOCK */
+    .partners {
+      background-color: #f4f6f8;
+      padding: 40px 20px 60px;
+      text-align: center;
+    }
+    .partners__title {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      color: #222;
+    }
+    .partners__list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      align-items: center;
+    }
+    .partners__item {
+      max-width: 150px;
+      max-height: 80px;
+      object-fit: contain;
+      filter: grayscale(20%);
+      transition: filter 0.3s ease;
+      cursor: default;
+    }
+    .partners__item:hover,
+    .partners__item:focus {
+      filter: none;
+      outline: none;
+    }
+    /* FOOTER */
+    .footer {
+      background-color: #222;
+      color: #eee;
+      text-align: center;
+      padding: 25px 20px;
+      font-size: 0.9rem;
+      margin-top: 60px;
+    }
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .services__container {
+        justify-content: center;
+      }
+    }
+    @media (max-width: 600px) {
+      .header__container {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+      }
+      .header__nav {
+        justify-content: center;
+      }
+      .hero__title {
+        font-size: 2rem;
+      }
+      .hero__description {
+        font-size: 1rem;
+      }
+      .service-card {
+        max-width: 100%;
+      }
+      .partners__list {
+        gap: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header__container container">
+      <div class="header__logo">MyCompany</div>
+      <nav class="header__nav" role="navigation" aria-label="Главное меню">
+        <a href="#hero" class="header__link">Главная</a>
+        <a href="#services" class="header__link">Услуги</a>
+        <a href="#partners" class="header__link">Партнеры</a>
+        <a href="#footer" class="header__link">Контакты</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="hero" role="region" aria-label="Главный экран">
+      <div class="hero__container container">
+        <h1 class="hero__title">
+          Профессиональные решения для вашего бизнеса
+        </h1>
+        <p class="hero__description">
+          Мы предлагаем полный спектр услуг для роста вашего проекта
+        </p>
+        <a href="#services" class="hero__button">Узнать больше</a>
+      </div>
+    </section>
+
+    <section class="services" id="services" role="region" aria-label="Услуги">
+      <div class="container">
+        <h2 style="text-align:center; margin-bottom: 40px; font-size: 2.5rem; color:#007bff;">Наши услуги</h2>
+        <div class="services__container">
+
+          <article class="service-card" tabindex="0">
+            <img
+              src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80"
+              alt="Веб-разработка"
+              class="service-card__image"
+            />
+            <div class="service-card__content">
+              <h3 class="service-card__title">Веб-разработка</h3>
+              <p class="service-card__text">
+                Создание адаптивных и современных сайтов любой сложности, с учётом последних тенденций в дизайне и функционале.
+              </p>
+            </div>
+          </article>
+
+          <article class="service-card" tabindex="0">
+            <img
+              src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=800&q=80"
+              alt="Маркетинг"
+              class="service-card__image"
+            />
+            <div class="service-card__content">
+              <h3 class="service-card__title">Маркетинг</h3>
+              <p class="service-card__text">
+                Разработка стратегий и кампаний для продвижения вашего бренда в цифровом пространстве, увеличение охвата и продаж.
+              </p>
+            </div>
+          </article>
+
+          <article class="service-card" tabindex="0">
+            <img
+              src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80"
+              alt="Дизайн"
+              class="service-card__image"
+            />
+            <div class="service-card__content">
+              <h3 class="service-card__title">Дизайн</h3>
+              <p class="service-card__text">
+                Создание привлекательного и удобного интерфейса, который поможет вашим пользователям достигать целей быстро и с удовольствием.
+              </p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="partners" id="partners" role="region" aria-label="Партнеры">
+      <div class="container">
+        <h2 class="partners__title">Наши партнеры</h2>
+        <div class="partners__list" tabindex="0" aria-label="Логотипы партнеров">
+
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Microsoft_logo_%282012%29.svg/160px-Microsoft_logo_%282012%29.svg.png"
+            alt="Партнер Microsoft"
+            class="partners__item"
+          />
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/160px-Apple_logo_black.svg.png"
+            alt="Партнер Apple"
+            class="partners__item"
+          />
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/160px-Netflix_2015_logo.svg.png"
+            alt="Партнер Netflix"
+            class="partners__item"
+          />
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/160px-Google_2015_logo.svg.png"
+            alt="Партнер Google"
+            class="partners__item"
+          />
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="footer">
+    <p>© 2025 MyCompany. Все права защищены.</p>
+  </footer>
+
+</body>
+</html>
